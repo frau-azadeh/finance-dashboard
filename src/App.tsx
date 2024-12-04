@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Box, CssBaseline, Typography } from "@mui/material";
+import Header from "./components/Header/Header"; // مسیر صحیح فایل Header
+import Sidebar from "./components/Sidbar/Sidebar"; // مسیر صحیح فایل Sidebar
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            سلام آزاده
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline /> {/* ریست پیش‌فرض برای استایل‌دهی Material-UI */}
+
+      {/* Header */}
+      <Header />
+
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* محتوای اصلی */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1, // محتوای اصلی فضای باقی‌مانده را پر می‌کند
+          padding: 3, // فاصله داخلی
+          marginTop: "64px", // تنظیم فاصله برای هماهنگی با Header (ارتفاع پیش‌فرض Header = 64px)
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          داشبورد مالی
+        </Typography>
+        <Typography variant="body1">
+          اینجا محتوای اصلی داشبورد قرار می‌گیرد.
+        </Typography>
+      </Box>
+    </Box>
   );
-}
+};
 
 export default App;
