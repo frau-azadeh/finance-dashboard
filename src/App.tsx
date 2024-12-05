@@ -1,36 +1,45 @@
 import React from "react";
-import { Box, CssBaseline, Typography } from "@mui/material";
-import Header from "./components/Header/Header"; // مسیر صحیح فایل Header
-import Sidebar from "./components/Sidbar/Sidebar"; // مسیر صحیح فایل Sidebar
+import { Box, CssBaseline } from "@mui/material";
+import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
+import store from "./store/store";
+import { Provider } from "react-redux";
+import StockDashboard from "./components/StockDashboard/StockDashboard";
+import { CacheProvider } from "@emotion/react";
+import { rtlCache } from "./theme"; // فایل cache از theme.ts
+import theme from "./theme";
+import { ThemeProvider } from "@mui/material/styles";
 
 const App: React.FC = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline /> {/* ریست پیش‌فرض برای استایل‌دهی Material-UI */}
+    <CacheProvider value={rtlCache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ display: "flex", height: "100vh", overflow: "hidden", direction: "rtl" }}>
+          {/* Header */}
+          <Header />
 
-      {/* Header */}
-      <Header />
+          {/* Sidebar */}
+          <Sidebar />
 
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* محتوای اصلی */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1, // محتوای اصلی فضای باقی‌مانده را پر می‌کند
-          padding: 3, // فاصله داخلی
-          marginTop: "64px", // تنظیم فاصله برای هماهنگی با Header (ارتفاع پیش‌فرض Header = 64px)
-        }}
-      >
-        <Typography variant="h4" gutterBottom>
-          داشبورد مالی
-        </Typography>
-        <Typography variant="body1">
-          اینجا محتوای اصلی داشبورد قرار می‌گیرد.
-        </Typography>
-      </Box>
-    </Box>
+          {/* محتوای اصلی */}
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              padding: 3,
+              marginTop: "64px",
+              marginLeft: { md: "240px", sm: 0 }, // تنظیم فضای کنار سایدبار
+              textAlign: "right", // متن‌ها راست‌چین شوند
+            }}
+          >
+            <Provider store={store}>
+              <StockDashboard />
+            </Provider>
+          </Box>
+        </Box>
+      </ThemeProvider>
+    </CacheProvider>
   );
 };
 
