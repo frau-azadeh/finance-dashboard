@@ -29,7 +29,7 @@ const App: React.FC = () => {
               flexGrow: 1,
               padding: 3,
               marginTop: "64px",
-              marginLeft: { md: "240px", sm: 0 }, // تنظیم فضای کنار سایدبار
+              marginRight: { md: "240px", sm: 0 }, // تنظیم فضای کنار سایدبار
               textAlign: "right", // متن‌ها راست‌چین شوند
             }}
           >
